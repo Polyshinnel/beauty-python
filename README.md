@@ -58,3 +58,30 @@ WSGIApplicationGroup %{GLOBAL}
 </Directory>
 ```
 6. Перезагружаем сервер: sudo service apache2 restart
+
+
+# Развертывание проекта
+1. Переименовать файл config-init.py в config.py
+2. Настроить подключение к БД - где mysql://username:password@localhost/db_name
+
+```python
+class DevelopmentConfig(BaseConfig):
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEVELOPMENT_DATABASE_URI') or \
+                              'mysql://beauty_dev:test123@localhost/beauty_dev'
+
+class ProductionConfig(BaseConfig):
+    DEBUG = False
+    SQLALCHEMY_DATABASE_URI = os.environ.get('PRODUCTION_DATABASE_URI') or \
+                              'mysql://beauty_dev:test123@localhost/beauty_dev'
+```
+
+3. Зайти в консоль Python и произвести следующие комманды:
+
+```python
+from runner import app,db
+app.app_context().push()
+db.create_all()
+```
+Тут мы делаем следующее - создаем контекст приложения: app_context и запускаем создание базы данных
+
