@@ -84,6 +84,7 @@
 
 ```json
 {
+  "token" : "123412341234",
   "type": "status",
   "location_id": "1",
   "room_id": "1",
@@ -129,6 +130,7 @@
 **Ожидаемый ответ в контроллер /event-bus**
 ```json
 {
+  "token" : "123412341234",
   "type": "state",
   "location_id": "1",
   "room_id": "1",
@@ -148,6 +150,7 @@ state - передает параметры для смены статуса в 
 
 ```json
 {
+  "token" : "123412341234",
   "type": "pin-pad",
   "location_id": "1",
   "room_id": "1",
